@@ -22,7 +22,8 @@ TEST_CASE( "servo2, all positive" ){
     int len2 = 100;
     int x = 55;
     int y = 55;
-    float servo2 = calc_servo2(len1,len2,x,y);
+    int error = 0;
+    float servo2 = calc_servo2(len1,len2,x,y,error);
 
     REQUIRE(servo2 == Approx(2.3681) );     
 }
@@ -32,7 +33,8 @@ TEST_CASE( "servo2, negative x" ){
     int len2 = 100;
     int x = -55;
     int y = 55;
-    float servo2 = calc_servo2(len1,len2,x,y);
+    int error = 0;
+    float servo2 = calc_servo2(len1,len2,x,y,error);
 
     REQUIRE(servo2 == Approx(0.7719) );     
 }
@@ -42,9 +44,21 @@ TEST_CASE( "servo2, negative y" ){
     int len2 = 100;
     int x = 55;
     int y = -55;
-    float servo2 = calc_servo2(len1,len2,x,y);
+    int error = 0;
+    float servo2 = calc_servo2(len1,len2,x,y,error);
 
     REQUIRE(servo2 == Approx(2.3681) );     
+}
+
+TEST_CASE( "servo2, values outside domain" ){
+    int len1 = 170;
+    int len2 = 100;
+    int x = -30;
+    int y = 50;
+    int error = 0;
+    float servo2 = calc_servo2(len1,len2,x,y,error);
+
+    REQUIRE(error == 1);     
 }
 
 TEST_CASE( "servo1, all positive" ){
@@ -52,7 +66,8 @@ TEST_CASE( "servo1, all positive" ){
     int len2 = 100;
     int x = 55;
     int y = 55;
-    float servo2 = calc_servo2(len1,len2,x,y);
+    int error = 0;
+    float servo2 = calc_servo2(len1,len2,x,y,error);
     float servo1 = calc_servo1(len1,len2,x,y,servo2);
 
     REQUIRE(servo2 == Approx(2.3681)); 
@@ -64,7 +79,8 @@ TEST_CASE( "servo1, negative x" ){
     int len2 = 100;
     int x = -55;
     int y = 55;
-    float servo2 = calc_servo2(len1,len2,x,y);
+    int error = 0;
+    float servo2 = calc_servo2(len1,len2,x,y,error);
     float servo1 = calc_servo1(len1,len2,x,y,servo2);
 
     REQUIRE(servo2 == Approx(0.7719)); 
@@ -76,8 +92,9 @@ TEST_CASE( "servo1, negative y" ){
     int len2 = 100;
     int x = 55;
     int y = -55;
-
-    float servo2 = calc_servo2(len1,len2,x,y);
+    int error = 0;
+    
+    float servo2 = calc_servo2(len1,len2,x,y,error);
     float servo1 = calc_servo1(len1,len2,x,y,servo2);
 
     REQUIRE(servo2 == Approx(2.3681)); 

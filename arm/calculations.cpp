@@ -10,18 +10,32 @@
 /// \param[in] int len2, length of the second arm
 /// \param[in] int x, value of x that the arm should move to
 /// \param[in] int y, value of y that the arm should move to
+/// \param[out] int error, value will be set to 1 if a value is outside fo the domain
 /// \result value that servo2 should be in radians
-float calc_servo2(const int &len1, const int &len2 ,const int &x ,const int &y){
-    float d = (pow(len1,2) + pow(len2,2) - (pow(x,2) + pow(y,2))) / (2*len1*len2);
-    float result = atan2(d,sqrt(1-pow(d,2)));
-    if (x >= 0){
-        return (3.14 - result);
-    }
-    else if (x <0){
-        return (result);
+float calc_servo2(const int &len1, const int &len2 ,const int &x ,const int &y,int &error){
+    float d = (((pow(len1,2) + pow(len2,2)) - pow(x,2) + pow(y,2)) / (2*len1*len2));
+    if (d > 1){
+        // if d > 1 no value can be calculated
+        error = 1;
+        return 0;
     }
     else{
-        return result;
+        float result = atan2(d,-sqrt(1-pow(d,2)));
+        if (result == result){
+            if (x >= 0){
+                return (3.14 - result);
+            }
+            else if (x <0){
+                return (result);
+            }
+            else{
+                return result;
+            }
+        }
+        else{
+            error = 1;
+            return 0;
+        }
     }
 };
 
