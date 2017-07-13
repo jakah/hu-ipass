@@ -26,7 +26,7 @@ int main( void ){
    int len_arm_2 = 100;
    
    Arm arm(len_arm_1,len_arm_2,servo1,servo2,30,20);
-   int x = 100;
+   int x = 75;
    int y = 50;
   for(;;){
     if (potx.get() < 2000){

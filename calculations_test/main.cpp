@@ -68,7 +68,7 @@ TEST_CASE( "servo1, all positive" ){
     int y = 55;
     int error = 0;
     float servo2 = calc_servo2(len1,len2,x,y,error);
-    float servo1 = calc_servo1(len1,len2,x,y,servo2);
+    float servo1 = calc_servo1(len1,len2,x,y,servo2,error);
 
     REQUIRE(servo2 == Approx(2.3681)); 
     REQUIRE(servo1 == Approx(2.74135)); 
@@ -81,7 +81,7 @@ TEST_CASE( "servo1, negative x" ){
     int y = 55;
     int error = 0;
     float servo2 = calc_servo2(len1,len2,x,y,error);
-    float servo1 = calc_servo1(len1,len2,x,y,servo2);
+    float servo1 = calc_servo1(len1,len2,x,y,servo2,error);
 
     REQUIRE(servo2 == Approx(0.7719)); 
     REQUIRE(servo1 == Approx(1.16976)); 
@@ -95,7 +95,7 @@ TEST_CASE( "servo1, negative y" ){
     int error = 0;
     
     float servo2 = calc_servo2(len1,len2,x,y,error);
-    float servo1 = calc_servo1(len1,len2,x,y,servo2);
+    float servo1 = calc_servo1(len1,len2,x,y,servo2,error);
 
     REQUIRE(servo2 == Approx(2.3681)); 
     REQUIRE(servo1 == Approx(1.17055)); 
