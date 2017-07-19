@@ -11,7 +11,7 @@
 # settings for Arduino Due projects
 TARGET            := arduino_due
 SERIAL_PORT       ?= COM1
-CONSOLE_BAUDRATE  := 115200
+CONSOLE_BAUDRATE  := 2400
 
 # defer to the Makefile.shared
 include         Makefile.link

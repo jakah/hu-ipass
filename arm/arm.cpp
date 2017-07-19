@@ -2,34 +2,31 @@
 #include "../servo/servo.hpp"
 #include "calculations.hpp"
 
-Arm::Arm(const int &len1, const int &len2, Servo &servo1, Servo &servo2, int servo1_Offset, int servo2_Offset):
+Arm::Arm(int &len1, int &len2, Servo &servo1, Servo &servo2, int servo1_Offset, int servo2_Offset):
     len1(len1),len2(len2),servo1(servo1),servo2(servo2),servo1_Offset(servo1_Offset),servo2_Offset(servo2_Offset){
         x_pos = 0;
         y_pos = 0;
     };
 
-void Arm::setPos(const int &x , const int &y){
-    int error = 0;
-    float s2 = calc_servo2(len1,len2,x,y,error);
-    if (error == 0){
-        servo1_degrees = radianstodegrees(calc_servo1(len1,len2,x,y,s2,error));
-        if (error == 0){
-            servo2_degrees = radianstodegrees(s2);
-            if (servo1_degrees < 180){
-                servo1.setServo(servo1_degrees-10);
+void Arm::setPos(int &x, int &y){
+    float s1_degrees = 0;
+    float s2_degrees = 0;
+
+    int result = calc_positions(len1,len2,x,y,s1_degrees,s2_degrees);
+    if (result == 0){
+        servo1_degrees = (radianstodegrees(s1_degrees) -servo1_Offset);
+            servo1.setServo(servo1_degrees);
+            if (s2_degrees > 0){
+                servo2_degrees = (90-radianstodegrees(s2_degrees));
+                servo2.setServo(servo2_degrees);
             }
-            if (servo2_degrees <= 90){
-             servo2.setServo(90+servo2_degrees);
+            else if (s2_degrees < 0){
+                servo2_degrees  = (90+abs(radianstodegrees(s2_degrees)));
+                servo2.setServo(servo2_degrees);
             }
             x_pos = x;
             y_pos = y;
-        }
     }
-}
-
-void Arm::updateServos(){
-    servo1.updateServo();
-    servo2.updateServo();
 }
 
 int Arm::getX(){
@@ -37,14 +34,14 @@ int Arm::getX(){
 }
 
 int Arm::getY(){
-    return x_pos;
+    return y_pos;
 }
 
-void Arm::setOffsetServo1(const int &degrees){
+void Arm::setOffsetServo1(uint16_t &degrees){
     servo1_Offset = degrees;
 }
 
-void Arm::setOffsetServo2(const int &degrees){
+void Arm::setOffsetServo2(uint16_t &degrees){
     servo2_Offset = degrees;
 }
 
