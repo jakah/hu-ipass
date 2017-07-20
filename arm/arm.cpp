@@ -9,19 +9,19 @@ Arm::Arm(int &len1, int &len2, Servo &servo1, Servo &servo2, int servo1_Offset, 
     };
 
 void Arm::setPos(int &x, int &y){
-    float s1_degrees = 0;
-    float s2_degrees = 0;
+    uint16_t s1_degrees = 0;
+    uint16_t s2_degrees = 0;
 
     int result = calc_positions(len1,len2,x,y,s1_degrees,s2_degrees);
     if (result == 0){
-        servo1_degrees = (radianstodegrees(s1_degrees) -servo1_Offset);
+        servo1_degrees = (s1_degrees -servo1_Offset);
             servo1.setServo(servo1_degrees);
             if (s2_degrees > 0){
-                servo2_degrees = (90-radianstodegrees(s2_degrees));
+                servo2_degrees = (90-s2_degrees);
                 servo2.setServo(servo2_degrees);
             }
             else if (s2_degrees < 0){
-                servo2_degrees  = (90+abs(radianstodegrees(s2_degrees)));
+                servo2_degrees  = 90+ s2_degrees;
                 servo2.setServo(servo2_degrees);
             }
             x_pos = x;

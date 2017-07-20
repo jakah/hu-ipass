@@ -4,7 +4,11 @@
 #include "hwlib.hpp"
 #include "../servo/servo.hpp"
 /// \file
-
+/// \class Arm
+/// \brief
+/// the robotarm class
+/// \details
+/// This class handles all math that is need to move the robotarm to a given coordinate. 
 class Arm{
 private:
     int x_pos;
@@ -48,7 +52,13 @@ public:
     /// the y position of the robotarm
     /// \result int y, y position of the robotarm
     int getY();
+    /// \brief
+    /// return the value that servo1 should be
+    /// \result int degrees, value of servo1
     int getServo1Degrees();
+    /// \brief
+    /// return the value that servo2 should be
+    /// \result int degrees, value of servo2
     int getServo2Degrees();
 };
 #endif

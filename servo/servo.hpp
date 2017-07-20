@@ -18,7 +18,7 @@ private:
 public:
     /// \brief
     /// Create a servo object
-    /// \param[in] hwlib::pin_out pin_out, reference to the pin the servo's PWM pin is connected to
+    /// \param[in] hwlib::pin_out pin, reference to the pin the servo's PWM pin is connected to
     Servo(hwlib::pin_out &pin);
     /// \brief 
     /// Set the position of the servo
