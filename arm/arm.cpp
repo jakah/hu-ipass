@@ -2,53 +2,37 @@
 #include "../servo/servo.hpp"
 #include "calculations.hpp"
 
-Arm::Arm(int &len1, int &len2, Servo &servo1, Servo &servo2, int servo1_Offset, int servo2_Offset):
-    len1(len1),len2(len2),servo1(servo1),servo2(servo2),servo1_Offset(servo1_Offset),servo2_Offset(servo2_Offset){
+arm::arm(int &len1, int &len2):
+    len1(len1),len2(len2){
         x_pos = 0;
         y_pos = 0;
     };
-
-void Arm::setPos(int &x, int &y){
-    uint16_t s1_degrees = 0;
-    uint16_t s2_degrees = 0;
-
-    int result = calc_positions(len1,len2,x,y,s1_degrees,s2_degrees);
+void arm::set_position(int &x, int &y){
+    int result = calc_positions(len1,len2,x,y,joint1_degrees,joint2_degrees);
     if (result == 0){
-        servo1_degrees = (s1_degrees -servo1_Offset);
-            servo1.setServo(servo1_degrees);
-            if (s2_degrees > 0){
-                servo2_degrees = (90-s2_degrees);
-                servo2.setServo(servo2_degrees);
+            set_joint1(joint1_degrees);
+            if (joint2_degrees > 0){
+                set_joint2((90 - joint2_degrees));
             }
-            else if (s2_degrees < 0){
-                servo2_degrees  = 90+ s2_degrees;
-                servo2.setServo(servo2_degrees);
+            else if (joint2_degrees < 0){
+                set_joint2((90 + joint2_degrees));
             }
             x_pos = x;
             y_pos = y;
     }
 }
 
-int Arm::getX(){
+int arm::get_X(){
     return x_pos;
 }
 
-int Arm::getY(){
+int arm::get_Y(){
     return y_pos;
 }
 
-void Arm::setOffsetServo1(uint16_t &degrees){
-    servo1_Offset = degrees;
+uint16_t arm::get_joint1_degrees(){
+    return joint1_degrees;
 }
-
-void Arm::setOffsetServo2(uint16_t &degrees){
-    servo2_Offset = degrees;
-}
-
-int Arm::getServo1Degrees(){
-    return servo1_degrees;
-}
-
-int Arm::getServo2Degrees(){
-    return servo2_degrees;
+uint16_t arm::get_joint2_degrees(){
+    return joint2_degrees;
 }

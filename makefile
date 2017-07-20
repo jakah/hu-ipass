@@ -9,10 +9,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := arm/calculations.cpp servo/servo.cpp arm/arm.cpp joystick/joystick.cpp
+SOURCES := arm/calculations.cpp servo/servo.cpp arm/arm.cpp joystick/joystick.cpp arm/servoarm.cpp arm/advancedservoarm.cpp
 
 # header files in this project
-HEADERS := arm/calculations.hpp servo/servo.hpp arm/arm.hpp joystick/joystick.hpp
+HEADERS := arm/calculations.hpp servo/servo.hpp arm/arm.hpp joystick/joystick.hpp arm/servoarm.hpp arm/advancedservoarm.hpp
 
 # other places to look for files for this project
 SEARCH  :=

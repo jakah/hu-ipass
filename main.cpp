@@ -1,7 +1,6 @@
 #include "hwlib.hpp"
-#include "arm/calculations.hpp"
 #include "servo/servo.hpp"
-#include "arm/arm.hpp"
+#include "arm/advancedservoarm.hpp"
 #include "arm/vector.hpp"
 #include "joystick/joystick.hpp"
 /// \file
@@ -37,40 +36,41 @@ int main( void ){
    int len_arm_1 = 170;
    int len_arm_2 = 100;
    
-   Arm arm(len_arm_1,len_arm_2,servo1,servo2,0,0);
+   advancedservoarm arm(len_arm_1,len_arm_2,servo1,servo2,0,-5);
 
+   // initialize the joystick
    auto potx = target::pin_adc(target::ad_pins::a0);
    auto poty = target::pin_adc(target::ad_pins::a1);
    
    joystick joystick(potx,poty);
 
-   
+   // set a start position
    int x = 170;
    int y = 170;
-   arm.setPos(x,y);
-   display << "\fX:" << arm.getX() << "\nY: " << arm.getY() << "\nS1:" << arm.getServo1Degrees() << "\nS2:" << arm.getServo2Degrees() << hwlib::flush;
+   arm.set_position(x,y);
+   display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
 
    // keep checking if the user moved the joystick and if that is the case, move the arm a bit and update the display
   for(;;){
     if (joystick.left()){
         x -= 10;
-        arm.setPos(x,y);
-        display << "\fX:" << arm.getX() << "\nY: " << arm.getY() << "\nS1:" << arm.getServo1Degrees() << "\nS2:" << arm.getServo2Degrees() << hwlib::flush;
+        arm.set_position(x,y);
+        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
     else if (joystick.right()){
         x+=10;
-        arm.setPos(x,y);
-        display << "\fX:" << arm.getX() << "\nY: " << arm.getY() << "\nS1:" << arm.getServo1Degrees() << "\nS2:" << arm.getServo2Degrees() << hwlib::flush;
+        arm.set_position(x,y);
+        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
     if (joystick.up()){
         y += 10;
-        arm.setPos(x,y);
-        display << "\fX:" << arm.getX() << "\nY: " << arm.getY() << "\nS1:" << arm.getServo1Degrees() << "\nS2:" << arm.getServo2Degrees() << hwlib::flush;
+        arm.set_position(x,y);
+        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
     else if (joystick.down()){
         y-=10;
-        arm.setPos(x,y);
-        display << "\fX:" << arm.getX() << "\nY: " << arm.getY() << "\nS1:" << arm.getServo1Degrees() << "\nS2:" << arm.getServo2Degrees() << hwlib::flush;
+        arm.set_position(x,y);
+        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
 
   };

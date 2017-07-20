@@ -9,18 +9,17 @@
 /// the robotarm class
 /// \details
 /// This class handles all math that is need to move the robotarm to a given coordinate. 
-class Arm{
+class arm{
 private:
     int x_pos;
     int y_pos;
     int &len1;
     int &len2;
-    Servo &servo1;
-    Servo &servo2;
-    int &servo1_Offset;
-    int &servo2_Offset;
-    int servo1_degrees;
-    int servo2_degrees;
+    uint16_t joint1_degrees;
+    uint16_t joint2_degrees;
+protected:
+    virtual void set_joint1(const uint16_t &degrees) = 0;
+    virtual void set_joint2(const uint16_t &degrees) = 0;
 public:
     /// \brief
     /// constructor for the robotarm
@@ -28,37 +27,25 @@ public:
     /// \param[in] int len2, length of the second arm
     /// \param[in] Servo servo1, servo object of the first servo
     /// \param[in] Servo servo2, servo object of the second servo
-    Arm(int &len1, int &len2,Servo &servo1, Servo &servo2, int servo1_Offset, int servo2_Offset);
+    arm(int &len1, int &len2);
     /// \brief
     /// set the position of the robotarm
     /// \param[in] int x, the desired x position
     /// \param[in] int y, the desired y position
-    void setPos(int &x,int &y);
-    /// \brief
-    /// set the position of y in 
-    /// \details
-    /// Give the amount of degrees that need to be added to position the servo to the Y-axis
-    void setOffsetServo1(uint16_t &degrees);
-    /// \brief
-    /// set the offset for servo 2
-    /// \details 
-    /// Give the amount of degrees that need to be added to the second servo so it is 
-    void setOffsetServo2(uint16_t &degrees);
+    void set_position(int &x,int &y);
     /// \brief
     /// the x position of the robotarm
     /// \result int x, x position of the robotarm
-    int getX();
+    int get_X();
     /// \brief
     /// the y position of the robotarm
     /// \result int y, y position of the robotarm
-    int getY();
+    int get_Y();
     /// \brief
-    /// return the value that servo1 should be
-    /// \result int degrees, value of servo1
-    int getServo1Degrees();
-    /// \brief
-    /// return the value that servo2 should be
-    /// \result int degrees, value of servo2
-    int getServo2Degrees();
+    /// return the value that joint2 should be
+    /// \result int degrees, value of joint2
+    uint16_t get_joint1_degrees();
+    uint16_t get_joint2_degrees();
+
 };
 #endif
