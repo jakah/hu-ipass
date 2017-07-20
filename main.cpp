@@ -1,7 +1,7 @@
 #include "hwlib.hpp"
 #include "servo/servo.hpp"
 #include "arm/advancedservoarm.hpp"
-#include "arm/vector.hpp"
+#include "arm/coordinate.hpp"
 #include "joystick/joystick.hpp"
 /// \file
 /// \mainpage
@@ -45,33 +45,31 @@ int main( void ){
    joystick joystick(potx,poty);
 
    // set a start position
-   int x = 170;
-   int y = 170;
-   arm.set_position(x,y);
+   coordinate position (170,170);
+   arm.set_position(position);
    display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
 
    // keep checking if the user moved the joystick and if that is the case, move the arm a bit and update the display
   for(;;){
     if (joystick.left()){
-        x -= 10;
-        arm.set_position(x,y);
+        position -= coordinate (10,0);
+        arm.set_position(position);
         display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
     else if (joystick.right()){
-        x+=10;
-        arm.set_position(x,y);
+        position += coordinate(10,0);
+        arm.set_position(position);
         display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
     if (joystick.up()){
-        y += 10;
-        arm.set_position(x,y);
+        position += coordinate (0,10); 
+        arm.set_position(position);
         display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
     else if (joystick.down()){
-        y-=10;
-        arm.set_position(x,y);
+        position -= coordinate (0,10); 
+        arm.set_position(position);
         display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
     }
-
   };
 };

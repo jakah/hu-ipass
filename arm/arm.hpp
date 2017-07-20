@@ -2,9 +2,10 @@
 #define ARM_HPP
 #include "stdint.h"
 #include "hwlib.hpp"
+#include "coordinate.hpp"
 #include "../servo/servo.hpp"
 /// \file
-/// \class Arm
+/// \class arm
 /// \brief
 /// the robotarm class
 /// \details
@@ -13,6 +14,7 @@ class arm{
 private:
     int x_pos;
     int y_pos;
+    coordinate position;
     int &len1;
     int &len2;
     uint16_t joint1_degrees;
@@ -25,14 +27,16 @@ public:
     /// constructor for the robotarm
     /// \param[in] int len1, length of the first arm
     /// \param[in] int len2, length of the second arm
-    /// \param[in] Servo servo1, servo object of the first servo
-    /// \param[in] Servo servo2, servo object of the second servo
     arm(int &len1, int &len2);
     /// \brief
     /// set the position of the robotarm
     /// \param[in] int x, the desired x position
     /// \param[in] int y, the desired y position
-    void set_position(int &x,int &y);
+    void set_position(coordinate &position);
+    /// \brief
+    /// the position of the robotarm in a coordinate
+    /// \result coordinate position the position of the arm
+    coordinate get_position();
     /// \brief
     /// the x position of the robotarm
     /// \result int x, x position of the robotarm
@@ -42,9 +46,12 @@ public:
     /// \result int y, y position of the robotarm
     int get_Y();
     /// \brief
-    /// return the value that joint2 should be
-    /// \result int degrees, value of joint2
+    /// return the value that joint1 should be
+    /// \result uint16_t degrees, value of joint1
     uint16_t get_joint1_degrees();
+    /// \brief
+    /// return the value that joint2 should be
+    /// \result uint16_t degrees, value of joint2
     uint16_t get_joint2_degrees();
 
 };

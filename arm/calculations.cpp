@@ -1,8 +1,11 @@
 #include "math.h"
 #include "calculations.hpp"
+#include "coordinate.hpp"
 /// \file
 /// calculations arm based on this document <a href="http:://www.hessmer.org/uploads/RobotArm/Inverse%2520Kinematics%2520for%2520Robot%2520Arm.pdf"> www.hessmer.org/uploads/RobotArm/Inverse%2520Kinematics%2520for%2520Robot%2520Arm.pdf</a>
-int calc_positions(int &len1,int &len2,int &x, int &y,uint16_t &servo1, uint16_t &servo2){
+int calc_positions(int &len1,int &len2,coordinate &position,uint16_t &servo1, uint16_t &servo2){
+    int x = position.get_x();
+    int y = position.get_y();
     float pre_servo2 = atan2(sqrt(1-((pow(x,2)+pow(y,2) - pow(len1,2) - pow(len2,2))/(2*len1*len2))), ((pow(x,2) + pow(y,2) + pow(len1,2) + pow(len2,2))/(2*len1*len2)));
     float k1 = len1+(len2*cos(pre_servo2));
     float k2 = len2*sin(pre_servo2);
