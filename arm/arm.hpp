@@ -1,15 +1,14 @@
 #ifndef ARM_HPP
 #define ARM_HPP
 #include "stdint.h"
-#include "hwlib.hpp"
 #include "coordinate.hpp"
-#include "../servo/servo.hpp"
 /// \file
 /// \class arm
 /// \brief
 /// the robotarm class
 /// \details
 /// This class handles all math that is need to move the robotarm to a given coordinate. 
+/// It also funcions as a base class for all types of arm
 class arm{
 private:
     coordinate position;
@@ -28,9 +27,8 @@ public:
     arm(int &len1, int &len2);
     /// \brief
     /// set the position of the robotarm
-    /// \param[in] int x, the desired x position
-    /// \param[in] int y, the desired y position
-    void set_position(coordinate &position);
+    /// \param[in] coordinate position, the desired position of the arm
+    int set_position(coordinate &position);
     /// \brief
     /// the position of the robotarm in a coordinate
     /// \result coordinate position the position of the arm

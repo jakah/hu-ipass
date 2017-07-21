@@ -46,30 +46,49 @@ int main( void ){
 
    // set a start position
    coordinate position (170,170);
-   arm.set_position(position);
-   display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
-
+   if (arm.set_position(position) == 0){
+      display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+   }  
+   else{
+      display << "\fNot \npossible" << hwlib::flush;
+   }
    // keep checking if the user moved the joystick and if that is the case, move the arm a bit and update the display
   for(;;){
     if (joystick.left()){
         position -= coordinate (10,0);
-        arm.set_position(position);
-        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        if (arm.set_position(position) == 0){
+            display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        }  
+        else{
+            display << "\fNot \npossible" << hwlib::flush;
+        }
     }
     else if (joystick.right()){
         position += coordinate(10,0);
-        arm.set_position(position);
-        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        if (arm.set_position(position) == 0){
+            display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        }  
+        else{
+            display << "\fNot \npossible" << hwlib::flush;
+        }
     }
     if (joystick.up()){
         position += coordinate (0,10); 
-        arm.set_position(position);
-        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        if (arm.set_position(position) == 0){
+            display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        }  
+        else{
+            display << "\fNot \npossible" << hwlib::flush;
+        }
     }
     else if (joystick.down()){
         position -= coordinate (0,10); 
-        arm.set_position(position);
-        display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        if (arm.set_position(position) == 0){
+            display << "\fX:" << arm.get_X() << "\nY:" << arm.get_Y() << "\nS1:" << arm.get_joint1_degrees() << "\nS2:" << arm.get_joint2_degrees() << hwlib::flush;
+        }  
+        else{
+            display << "\fNot \npossible" << hwlib::flush;
+        }
     }
   };
 };

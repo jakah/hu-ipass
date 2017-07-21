@@ -1,12 +1,11 @@
 #include "arm.hpp"
-#include "../servo/servo.hpp"
 #include "calculations.hpp"
 #include "coordinate.hpp"
 arm::arm(int &len1, int &len2):
     len1(len1),len2(len2){
         coordinate position(0,0);
     };
-void arm::set_position(coordinate &desired_position){
+int arm::set_position(coordinate &desired_position){
     int result = calc_positions(len1,len2,desired_position,joint1_degrees,joint2_degrees);
     if (result == 0){
         set_joint1(joint1_degrees);
@@ -18,6 +17,7 @@ void arm::set_position(coordinate &desired_position){
         }
         position = desired_position;
     }
+    return result;
 }
 
 int arm::get_X(){

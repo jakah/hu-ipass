@@ -1,13 +1,12 @@
 #include "arm.hpp"
-#include "../servo/servo.hpp"
 /// \file
-/// \class servoarm
+/// \class testarm
 /// \brief
 /// \a arm with servomotors
-class servoarm : public arm{
+class testarm : public arm{
 protected:
-    Servo &servo1;
-    Servo &servo2;
+    int &servo1;
+    int &servo2;
     int servo1_degrees;
     int servo2_degrees;
 public:   
@@ -17,7 +16,7 @@ public:
     /// \param[in] int len2, the lenght of the second arm
     /// \param[in] Servo servo1, the servo that is joint1
     /// \param[in] Servo servo2, the servo that is joint2
-    servoarm(int &len1, int &len2, Servo &servo1, Servo &servo2);
+    testarm(int &len1, int &len2, int &servo1, int &servo2);
     /// \brief
     /// set the angle of the first joint
     /// \param[in] uint16_t degrees, the angle the first joint should be set to

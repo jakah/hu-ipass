@@ -9,10 +9,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := ../arm/calculations.cpp
+SOURCES := ../arm/arm.cpp ../arm/testarm.cpp ../arm/calculations.cpp 
 
 # header files in this project
-HEADERS := ../arm/calculations.hpp
+HEADERS := ../arm/arm.hpp ../arm/testarm.hpp ../arm/calculations.hpp ../arm/coordinate.hpp
 
 # other places to look for files for this project
 SEARCH  := 

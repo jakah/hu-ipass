@@ -11,4 +11,5 @@
 /// \param[in] coordinate position, the position the end of the arm should move to
 /// \param[out] uint16_t servo1, the angle joint1 should be set to
 /// \param[out] uint16_t servo2, the angle joint2 should be set to
+/// \result int error, 0 on success 1 on error.
 int calc_positions(int &len1,int &len2,coordinate &position,uint16_t &servo1, uint16_t &servo2);
