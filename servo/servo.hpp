@@ -13,8 +13,6 @@
 class Servo {
 private:
     hwlib::pin_out & pin;
-    int pulse_time;
-    int updateCalls;
 public:
     /// \brief
     /// Create a servo object
@@ -25,12 +23,6 @@ public:
     /// \param[in] int position, give the position in degrees, 0 is the most left 
     /// position ,180 is the most right position
     void setServo(const int &position);
-    /// \brief
-    /// give the servo a new pulse
-    /// \details
-    /// This function gives a new pulse to the servo every 15 calls. Therefore  it should be called every 
-    /// millisecond(it doesn't have to be exactly 1 millisecond it can be more or less since the servo has some margin). 
-    void updateServo();
 };
 
 #endif

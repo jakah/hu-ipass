@@ -36,7 +36,7 @@ int main( void ){
    int len_arm_1 = 170;
    int len_arm_2 = 100;
    
-   advancedservoarm arm(len_arm_1,len_arm_2,servo1,servo2,0,-5);
+   advancedservoarm arm(len_arm_1,len_arm_2,servo1,servo2,-5,0);
 
    // initialize the joystick
    auto potx = target::pin_adc(target::ad_pins::a0);

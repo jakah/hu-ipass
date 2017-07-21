@@ -22,13 +22,13 @@ public:
     /// \brief
     /// set the angle of the first joint
     /// \details 
-    /// This function will set the angle of the first joint, it will subtract the offset from degrees
+    /// This function will set the angle of the first joint, it will add the offset to degrees
     /// \param[in] uint16_t degrees, the angle the first joint should be set to
     void set_joint1(const uint16_t &degrees);
     /// \brief
     /// set the angle of the second joint
     /// \details 
-    /// This function will set the angle of the second joint, it will subtract the offset from degrees
+    /// This function will set the angle of the second joint, it will add the offset to degrees
     /// \param[in] uint16_t degrees, the angle the second joint should be set to
     void set_joint2(const uint16_t &degrees);
     /// \brief

@@ -12,8 +12,6 @@
 /// This class handles all math that is need to move the robotarm to a given coordinate. 
 class arm{
 private:
-    int x_pos;
-    int y_pos;
     coordinate position;
     int &len1;
     int &len2;
